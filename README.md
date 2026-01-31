@@ -1,0 +1,200 @@
+# Antisemitism Detection System
+
+An AI-powered system that analyzes text to detect antisemitic rhetoric using advanced NLP techniques, RAG (Retrieval-Augmented Generation), and multi-step reasoning.
+
+## Features
+
+- **Comprehensive Trope Detection**: Identifies 10 types of antisemitic tropes including:
+  - Elite control conspiracies
+  - Dual loyalty accusations
+  - Collective guilt
+  - Financial conspiracies
+  - Blood libel
+  - Holocaust denial/distortion
+  - Proxy figures
+  - Dog whistles
+  - Religious demonization
+
+- **Multi-Factor Scoring**: Risk assessment considers:
+  - Trope strength and type
+  - Counterfactual reasoning
+  - Target explicitness
+  - Language explicitness
+
+- **High Performance**: 
+  - Async/parallel processing (3x faster)
+  - Intelligent caching
+  - Batch processing support
+
+- **Robust Evaluation**: Comprehensive metrics and visualizations
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd blueSquareAI
+```
+
+2. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env and add your OPENROUTER_API_KEY
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+from pipeline.aggregate import classify_text
+
+result = classify_text("They control the media narrative.")
+
+print(f"Risk Score: {result['risk_score']}")
+print(f"Verdict: {result['verdict']}")
+print(f"Trope: {result['trope']}")
+```
+
+### Async Usage
+
+```python
+from pipeline.aggregate import classify_text_async
+import asyncio
+
+async def main():
+    result = await classify_text_async("They control the media narrative.")
+    print(result)
+
+asyncio.run(main())
+```
+
+### Batch Processing
+
+```python
+from pipeline.aggregate import classify_texts_batch
+import asyncio
+
+texts = [
+    "They control the media.",
+    "The Rothschilds control banking.",
+    "Israel's policies are illegal."
+]
+
+results = asyncio.run(classify_texts_batch(texts))
+for text, result in zip(texts, results):
+    print(f"{text}: {result['risk_score']:.2f}")
+```
+
+## Output Format
+
+```python
+{
+    "verdict": "High-risk trope-based rhetoric",
+    "risk_score": 0.75,
+    "trope": "elite_control",
+    "trope_strength": 0.8,
+    "explanation": "Alternative interpretation...",
+    "reasoning": "Brief explanation...",
+    "details": {
+        "extracted_claim": "...",
+        "target": "implicit_jews",
+        "explicitness": "implicit",
+        "counterfactual": "...",
+        "meaning_preserved": False,
+        "counterfactual_explanation": "..."
+    }
+}
+```
+
+## Evaluation
+
+Run the evaluation script to assess system performance:
+
+```bash
+python evaluate.py
+```
+
+This will:
+- Test the system on evaluation data
+- Calculate comprehensive metrics (MAE, RMSE, R², Accuracy, Precision, Recall, F1)
+- Generate visualizations
+- Save detailed results to `evaluation_results.json`
+
+## Architecture
+
+The system uses a multi-stage pipeline:
+
+1. **Claim Extraction**: Extracts main claims and identifies targets
+2. **Context Retrieval**: Retrieves relevant knowledge base documents using RAG
+3. **Trope Mapping**: Maps claims to known antisemitic tropes
+4. **Counterfactual Testing**: Tests if claims depend on identity-based meaning
+5. **Risk Scoring**: Multi-factor risk score calculation
+
+### Pipeline Components
+
+- `pipeline/aggregate.py` - Main entry point
+- `pipeline/extract_claim.py` - Claim extraction
+- `pipeline/retrieve_context.py` - RAG-based context retrieval
+- `pipeline/map_trope.py` - Trope identification
+- `pipeline/counterfactual.py` - Counterfactual reasoning
+- `pipeline/aggregate_optimized.py` - Optimized async implementation
+
+### Knowledge Base
+
+The `kb/` directory contains reference materials on:
+- IHRA definition of antisemitism
+- Various antisemitic tropes
+- Guidelines for distinguishing criticism from antisemitism
+
+## Performance
+
+- **Single query**: ~2-3 seconds
+- **Cached query**: ~0ms (instant)
+- **Batch processing**: ~2-3 seconds for multiple texts (parallel)
+
+## Requirements
+
+- Python 3.8+
+- OpenAI API key (via OpenRouter)
+- See `requirements.txt` for full dependencies
+
+## Project Structure
+
+```
+blueSquareAI/
+├── pipeline/              # Core pipeline modules
+│   ├── aggregate.py       # Main entry point
+│   ├── aggregate_optimized.py  # Optimized async implementation
+│   ├── extract_claim.py   # Claim extraction
+│   ├── extract_claim_async.py
+│   ├── retrieve_context.py  # RAG-based retrieval
+│   ├── map_trope.py       # Trope identification
+│   ├── map_trope_async.py
+│   ├── counterfactual.py  # Counterfactual reasoning
+│   └── counterfactual_async.py
+├── kb/                    # Knowledge base (trope definitions)
+├── eval_data.py          # Evaluation dataset
+├── evaluate.py           # Evaluation script
+└── README.md
+```
+
+## License
+
+[Add your license here]
+
+## Acknowledgments
+
+Built for the Marshall Wace Hackathon. Uses the IHRA definition of antisemitism as a reference framework.
+
