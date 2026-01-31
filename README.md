@@ -1,6 +1,8 @@
-# Antisemitism Detection System
+# BlueSqureAI
 
 An AI-powered system that analyzes text to detect antisemitic rhetoric using RAG (Retrieval-Augmented Generation) and multi-step reasoning.
+
+Entry in the Marshall Wace field of Hack@Brown 2025
 
 ## Features
 
@@ -171,9 +173,10 @@ blueSquareAI/
 │   ├── map_trope_async.py
 │   ├── counterfactual.py  # Counterfactual reasoning
 │   └── counterfactual_async.py
-├── kb/                    # Knowledge base (trope definitions)
-├── eval_data.py          # Evaluation dataset
-├── evaluate.py           # Evaluation script
+├── kb/                       # Knowledge base (trope definitions)
+├── eval_data.py             # Evaluation dataset
+├── evaluate.py              # Evaluation script
+├── liveDemo.ipynb           # Demo for judging presentation
 └── README.md
 ```
 
