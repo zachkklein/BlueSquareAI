@@ -4,6 +4,8 @@ An AI-powered system that analyzes text to detect antisemitic rhetoric using RAG
 
 Entry in the Marshall Wace field of Hack@Brown 2025
 
+---
+
 ## Features
 
 - **Comprehensive Trope Detection**: Identifies 10 types of antisemitic tropes including:
@@ -22,6 +24,40 @@ Entry in the Marshall Wace field of Hack@Brown 2025
   - Counterfactual reasoning
   - Target explicitness
   - Language explicitness
+
+---
+
+## Demo
+
+**Risk Score:** 0.70 / 1.0  
+**Verdict:** High-risk trope-based rhetoric  
+**Detected Trope:** `elite_control`  
+**Trope Strength:** 0.70  
+
+**Explanation:**  
+The claim could be interpreted as a critique of the influence of financial institutions on media without implying an ethnic conspiracy.  
+
+**Reasoning:**  
+The claim:
+
+> "The group of bankers control the media"
+
+closely resembles the **'elite control' trope**, which suggests that Jews collectively control powerful institutions like media and finance. The use of terms like *"bankers"* and *"control the media"* aligns with historical antisemitic narratives. However, without explicit mention of Jews, it could also be interpreted as a general critique of financial influence on media, making the resemblance strong but not definitive.
+
+---
+
+# Detailed Analysis
+
+- **Extracted Claim:** The group of bankers control the media  
+- **Target:** `implicit_jews`  
+- **Explicitness:** Implicit  
+- **Counterfactual:** A group controls the media  
+- **Meaning Preserved:** False  
+
+**Counterfactual Explanation:**  
+The original claim specifically identifies *"bankers"* as the group in control, which may carry implicit identity-based assumptions or stereotypes. By replacing this specific identity with a neutral term, the claim loses its specific connotation and potential implications about the group's identity, thus changing the meaning.
+
+---
 
 ## Installation
 
@@ -47,6 +83,9 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env and add your OPENROUTER_API_KEY
 ```
+
+---
+
 
 ## Quick Start
 
@@ -113,6 +152,9 @@ for text, result in zip(texts, results):
 }
 ```
 
+---
+
+
 ## Evaluation
 
 Run the evaluation script to assess system performance:
@@ -127,6 +169,9 @@ This will:
 - Generate visualizations
 - Save detailed results to `evaluation_results.json`
 
+---
+
+
 ## Architecture
 
 The system uses a multi-stage pipeline:
@@ -137,6 +182,9 @@ The system uses a multi-stage pipeline:
 4. **Counterfactual Testing**: Tests if claims depend on identity-based meaning
 5. **Risk Scoring**: Multi-factor risk score calculation
 
+---
+
+
 ### Pipeline Components
 
 - `pipeline/aggregate.py` - Main entry point
@@ -146,6 +194,9 @@ The system uses a multi-stage pipeline:
 - `pipeline/counterfactual.py` - Counterfactual reasoning
 - `pipeline/aggregate_optimized.py` - Optimized async implementation
 
+---
+
+
 ### Knowledge Base
 
 The `kb/` directory contains reference materials on:
@@ -153,11 +204,17 @@ The `kb/` directory contains reference materials on:
 - Various antisemitic tropes
 - Guidelines for distinguishing criticism from antisemitism
 
+---
+
+
 ## Requirements
 
 - Python 3.8+
 - OpenAI API key (via OpenRouter)
 - See `requirements.txt` for full dependencies
+
+---
+
 
 ## Project Structure
 
@@ -180,9 +237,15 @@ blueSquareAI/
 └── README.md
 ```
 
+---
+
+
 ## License
 
 Apache 2.0
+
+---
+
 
 ## Acknowledgments
 
