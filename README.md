@@ -1,6 +1,6 @@
 # Antisemitism Detection System
 
-An AI-powered system that analyzes text to detect antisemitic rhetoric using advanced NLP techniques, RAG (Retrieval-Augmented Generation), and multi-step reasoning.
+An AI-powered system that analyzes text to detect antisemitic rhetoric using RAG (Retrieval-Augmented Generation) and multi-step reasoning.
 
 ## Features
 
@@ -21,18 +21,11 @@ An AI-powered system that analyzes text to detect antisemitic rhetoric using adv
   - Target explicitness
   - Language explicitness
 
-- **High Performance**: 
-  - Async/parallel processing (3x faster)
-  - Intelligent caching
-  - Batch processing support
-
-- **Robust Evaluation**: Comprehensive metrics and visualizations
-
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/zachkklein/BlueSquareAI
 cd blueSquareAI
 ```
 
@@ -89,7 +82,7 @@ import asyncio
 texts = [
     "They control the media.",
     "The Rothschilds control banking.",
-    "Israel's policies are illegal."
+    "All Jews are responsible for Israel's actions."
 ]
 
 results = asyncio.run(classify_texts_batch(texts))
@@ -158,12 +151,6 @@ The `kb/` directory contains reference materials on:
 - Various antisemitic tropes
 - Guidelines for distinguishing criticism from antisemitism
 
-## Performance
-
-- **Single query**: ~2-3 seconds
-- **Cached query**: ~0ms (instant)
-- **Batch processing**: ~2-3 seconds for multiple texts (parallel)
-
 ## Requirements
 
 - Python 3.8+
@@ -192,9 +179,12 @@ blueSquareAI/
 
 ## License
 
-[Add your license here]
+Apache 2.0
 
 ## Acknowledgments
 
-Built for the Marshall Wace Hackathon. Uses the IHRA definition of antisemitism as a reference framework.
+Built for the Marshall Wace track at Hack@Brown Hackathon. Uses the IHRA definition of antisemitism as a reference framework.
 
+Thanks to Sachin and Henry from Marshall Wace for their workshop on AI which helped me understand pipelines and RAG
+
+Used ChatGPT, Google Gemini, and Cursor for help in building, documenting, and testing the code
